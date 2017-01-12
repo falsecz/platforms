@@ -47,19 +47,19 @@ nvm install ${NODE_VERSION}
 rm -f ~/.nvm_bin
 ln -s $NVM_BIN ~/.nvm_bin
 
-if [ -f ${CURRENT_DIR}/package.json ] && [ -f "${CURRENT_DIR}/yarn.lock" ]; then
-    echo "yarn.lock detected, using yarn to install node packages"
-    yarn_bin=${NVM_BIN}/yarn
-    if [ ! -f $yarn_bin ]; then
-        npm install -g yarn@0.16.1
-    fi
-    if [ $NPM_REGISTRY ]; then
-        echo "registry \"$NPM_REGISTRY\"" > ~/.yarnrc
-        sed -i "s|https://registry.yarnpkg.com|$NPM_REGISTRY|g" ${CURRENT_DIR}/yarn.lock
-    fi
-    pushd $CURRENT_DIR && ${yarn_bin} install
-    popd
-elif [ -f ${CURRENT_DIR}/package.json ] ; then
-    pushd $CURRENT_DIR && npm install --production
-    popd
-fi
+# if [ -f ${CURRENT_DIR}/package.json ] && [ -f "${CURRENT_DIR}/yarn.lock" ]; then
+#     echo "yarn.lock detected, using yarn to install node packages"
+#     yarn_bin=${NVM_BIN}/yarn
+#     if [ ! -f $yarn_bin ]; then
+#         npm install -g yarn@0.16.1
+#     fi
+#     if [ $NPM_REGISTRY ]; then
+#         echo "registry \"$NPM_REGISTRY\"" > ~/.yarnrc
+#         sed -i "s|https://registry.yarnpkg.com|$NPM_REGISTRY|g" ${CURRENT_DIR}/yarn.lock
+#     fi
+#     pushd $CURRENT_DIR && ${yarn_bin} install
+#     popd
+# elif [ -f ${CURRENT_DIR}/package.json ] ; then
+#     pushd $CURRENT_DIR && npm install --production
+#     popd
+# fi
