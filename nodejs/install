@@ -7,8 +7,15 @@
 SOURCE_DIR=/var/lib/tsuru
 source ${SOURCE_DIR}/base/rc/config
 
+
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
 apt-get update
-apt-get install git -y
+apt-get install git build-essential bzip2 python2.7 -y
+
+
+
 git clone https://github.com/creationix/nvm.git /etc/nvm
 cd /etc/nvm && git checkout `git describe --abbrev=0 --tags`
 
@@ -17,3 +24,6 @@ if [ -e ${HOME}/.nvm_bin ]; then
 	export PATH="${HOME}/.nvm_bin:$PATH"
 fi
 EOF
+
+
+apt-get install yarn -y
